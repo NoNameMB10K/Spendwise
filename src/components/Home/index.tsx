@@ -23,6 +23,7 @@ export const Home: FC = () => {
         />
       </Box>
       <Grid container>
+
         <Grid item sm={6} md={6}>
           <Card className={"card"}>
             <img
@@ -48,6 +49,7 @@ export const Home: FC = () => {
             </CardActions>
           </Card>
         </Grid>
+
         <Grid item sm={6} md={6}>
           <Card className={"card"}>
             <img
@@ -73,6 +75,33 @@ export const Home: FC = () => {
             </CardActions>
           </Card>
         </Grid>
+
+        <Grid item sm={6} md={6}>
+          <Card className={"card"}>
+            <img
+              src="/asset/statistics.png"
+              alt="Statistics"
+              className={"card-image"}
+            />
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                textAlign={"center"}
+                className={"section-title"}
+              >
+                Statistics
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button href="/statistics" variant="contained">
+                <Typography>Go to</Typography>
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+
       </Grid>
     </Box>
   );

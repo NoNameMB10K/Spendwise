@@ -15,9 +15,10 @@ export const AppHeader: FC = () => {
             <Typography className={"menu-button-text"}>Categories</Typography>
           </Button>
           <Button variant="contained" href="/upload-receipt">
-            <Typography className={"menu-button-text"}>
-              Upload receipt
-            </Typography>
+            <Typography className={"menu-button-text"}>Upload receipt</Typography>
+          </Button>
+          <Button variant="contained" href="/statistics">
+            <Typography className={"menu-button-text"}>Statistics</Typography>
           </Button>
         </Toolbar>
       </Container>
