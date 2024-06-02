@@ -1,8 +1,8 @@
 import { AppBar, Button, Container, Toolbar, Typography } from "@mui/material";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 import "./AppHeader.css";
-import {Link} from "react-router-dom"
 
 export const AppHeader: FC = () => {
   return (
@@ -16,7 +16,9 @@ export const AppHeader: FC = () => {
             <Typography className={"menu-button-text"}>Categories</Typography>
           </Button>
           <Button variant="contained" component={Link} to="/upload-receipt">
-            <Typography className={"menu-button-text"}>Upload receipt</Typography>
+            <Typography className={"menu-button-text"}>
+              Upload receipt
+            </Typography>
           </Button>
           <Button variant="contained" component={Link} to="/statistics">
             <Typography className={"menu-button-text"}>Statistics</Typography>

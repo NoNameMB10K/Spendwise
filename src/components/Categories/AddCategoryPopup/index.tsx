@@ -13,6 +13,7 @@ import {
 import { CategoriesApiClient } from "../../../API/Clients/CategoriesApiClient";
 import { CategoryModel } from "../../../API/Models/CategoryModel";
 import { Category } from "../../shared/types/Category";
+
 interface AddCategoryPopupProps {
   open: boolean;
   onClose: () => void;
