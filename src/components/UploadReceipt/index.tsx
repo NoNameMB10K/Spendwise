@@ -26,12 +26,18 @@ export const UploadReceipt: FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isSetupComplete, setIsSetupComplete] = useState(false); 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    setCategoriesSelected([]);
+  }
   const handleClose = () => setOpen(false);
   const [scannedImage, setScannedImage] = useState<File | null>(null);
   const [categorizedProducts, setCategorizedProducts] = useState<
     CategorizedProduct[]
   >([]);
+
+  const [categoriesSelected, setCategoriesSelected] = useState<Category[]>([]);
+
   const navigate = useNavigate();
 
   const [selectedProduct, setSelectedProduct] = useState<ScannedProduct | null>(null);
@@ -57,11 +63,14 @@ export const UploadReceipt: FC = () => {
         ),
       };
       const res = await ReceiptsApiClient.saveCart(model);
+      console.log("save happened");
       navigate("/products");
     } catch (error: any) {
       console.log(error);
     }
   };
+
+
 
   const handleEditing = (product: ScannedProduct, index: number, newCategories: Category[]) => {
     // Find the original category of the product
@@ -93,6 +102,10 @@ export const UploadReceipt: FC = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, categoriesSelected);
 
   return !isSetupComplete ? (
     <Box className={"spinner-layout"}>
@@ -187,6 +200,7 @@ export const UploadReceipt: FC = () => {
           setScannedImage(file);
           setCategorizedProducts(categorizedProducts);
         }}
+        setFunction= {setCategoriesSelected}
       />
 
       <SwapCategoryPopup
@@ -198,7 +212,7 @@ export const UploadReceipt: FC = () => {
         onEditing={handleEditing} // Modified
         product={selectedProduct}
         id={selectedIndex}
-        categories={categories}
+        categories={categoriesSelected}
       />
     </Box>
   );

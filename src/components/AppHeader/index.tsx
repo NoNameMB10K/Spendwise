@@ -8,6 +8,7 @@ export const AppHeader: FC = () => {
   return (
     <AppBar position="static">
       <Container maxWidth={false}>
+
         <Toolbar disableGutters className={"menu-container"}>
           <Button variant="contained" component={Link} to="/">
             <Typography className={"menu-button-text"}>Home</Typography>
@@ -23,6 +24,11 @@ export const AppHeader: FC = () => {
           <Button variant="contained" component={Link} to="/statistics">
             <Typography className={"menu-button-text"}>Statistics</Typography>
           </Button>
+
+          <Button variant="contained" component={Link} to="/products">
+            <Typography className={"menu-button-text"}>Product</Typography>
+          </Button>
+
         </Toolbar>
       </Container>
     </AppBar>

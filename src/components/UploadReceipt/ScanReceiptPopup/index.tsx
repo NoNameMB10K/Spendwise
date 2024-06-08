@@ -24,6 +24,7 @@ interface ScanReceiptPopupProps {
   onClose: () => void;
   categories: Category[];
   onScanning: (file: File, categorizedProduct: CategorizedProduct[]) => void;
+  setFunction: (newList:Category[])=> void;
 }
 
 export const ScanReceiptPopup: FC<ScanReceiptPopupProps> = ({
@@ -31,6 +32,7 @@ export const ScanReceiptPopup: FC<ScanReceiptPopupProps> = ({
   onClose,
   categories,
   onScanning,
+  setFunction,
 }: ScanReceiptPopupProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File>();
@@ -58,6 +60,8 @@ export const ScanReceiptPopup: FC<ScanReceiptPopupProps> = ({
         selectedCategories.filter((el) => el.id !== category.id)
       );
     }
+    // setFunction([]);
+    // setFunction(selectedCategories);
   };
 
   const handleClose = () => {
@@ -89,8 +93,13 @@ export const ScanReceiptPopup: FC<ScanReceiptPopupProps> = ({
       );
       onScanning(file, categorizedProducts);
 
-      handleClose();
+      const uniqueCategories = Array.from(new Set(selectedCategories.map(cat => cat.id)))
+        .map(id => selectedCategories.find(cat => cat.id === id) as Category);
+      setFunction(uniqueCategories);
+      
       setIsLoading(false);
+      handleClose();
+
     } catch (error: any) {
       console.log(error);
     }
@@ -141,7 +150,9 @@ export const ScanReceiptPopup: FC<ScanReceiptPopupProps> = ({
           Close
         </Button>
         <Button
-          onClick={handleScanReceipt}
+          onClick={
+            handleScanReceipt
+          }
           className="save-button"
           variant="contained"
           color="primary"

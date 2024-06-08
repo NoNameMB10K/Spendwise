@@ -11,6 +11,7 @@ export const ReceiptsApiClient = {
         formData.append("categories", JSON.stringify(categories));
 
         return SpendWiseClient.post(this.urlPath + "/scan", formData, {
+            
             headers:{
                 "Content-Type":"multipart/form-data",
             }
