@@ -55,7 +55,6 @@ export const UpdateCategoryPopup: FC<UpdateCategoryPopupProps> = ({
   const handleSave = async () => {
     const categoryModel = await updateCategory();
     const updatedCategory = categoryModel as Category;
-    // console.log("Updated category: category model: " + categoryModel?.id +" "+ categoryModel?.name);
     onEditing(updatedCategory);
     handleClose();
   };

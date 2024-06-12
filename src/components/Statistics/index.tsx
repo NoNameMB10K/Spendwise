@@ -44,10 +44,10 @@ export const Statistics: FC = () => {
 
   useEffect(() => {
     fetchSpendings();
-  }, []); // Empty dependency array to run only once on mount
+  }, []);
 
   const spendingData = processData(categorySpendings);
-
+  const total = categorySpendings.reduce((acc, item) => acc + item.totalSpent, 0).toFixed(2);
   return (
     <Box className={"statistics-page-container"}>
       <Box className={"statistics-title-text"}>Statistics</Box>
@@ -56,7 +56,7 @@ export const Statistics: FC = () => {
         <Box className="statistics-graph-container">
           <Box className={"statistics-title-text"}>
             Total spending:
-            {categorySpendings.reduce((acc, item) => acc + item.totalSpent, 0)}
+            {total}
           </Box>
           <Pie data={spendingData} />
         </Box>

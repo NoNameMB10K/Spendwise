@@ -22,7 +22,6 @@ export const SwapCategoryPopup: FC<SwapCategoryPopupProps> = ({
 }) => {
 
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  console.log("in file " + product?.name + " " + id);
 
   useEffect(() => {
     if (!open) {

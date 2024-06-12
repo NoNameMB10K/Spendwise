@@ -63,7 +63,6 @@ export const UploadReceipt: FC = () => {
         ),
       };
       const res = await ReceiptsApiClient.saveCart(model);
-      console.log("save happened");
       navigate("/products");
     } catch (error: any) {
       console.log(error);
@@ -71,29 +70,29 @@ export const UploadReceipt: FC = () => {
   };
 
 
-
   const handleEditing = (product: ScannedProduct, index: number, newCategories: Category[]) => {
-    // Find the original category of the product
     const oldCategory = categorizedProducts.find(category =>
       category.products.some(prod => prod.name === product.name)
     );
+    const category = categorizedProducts.find(cat => cat.id === newCategories[0].id);
+
+    // console.log("prod name: " + product.name + " category:" + newCategories[0].name);
 
     if (oldCategory) {
-      // Remove the product from its old category
+      const occurrencesCount = oldCategory.products.reduce((count, prod) => {
+          if (prod.name === product.name) {
+              return count + 1;
+          }
+          return count;
+      }, 0);
       oldCategory.products = oldCategory.products.filter(prod => prod.name !== product.name);
-      if (oldCategory.products.length === 0) {
-        setCategorizedProducts(categorizedProducts.filter(cat => cat.id !== oldCategory.id));
-      } else {
-        setCategorizedProducts([...categorizedProducts]);
-      }
 
-      // Add the product to the new categories
-      newCategories.forEach(newCategory => {
-        const category = categorizedProducts.find(cat => cat.id === newCategory.id);
+      for (let i = 0; i < occurrencesCount; i++) {
         if (category) {
           category.products.push(product);
         }
-      });
+      }
+
     }
     setSelectedProduct(null);
     setSelectedIndex(null);
@@ -174,7 +173,6 @@ export const UploadReceipt: FC = () => {
 
                           <IconButton 
                             onClick={() =>{
-                              console.log("icon click" + product.name + " index:" + index);
                               setSelectedProduct(product);
                               setSelectedIndex(index);
                             }} className="swap-category-button"
